@@ -1,0 +1,30 @@
+jupyterhub:
+  custom:
+    2i2c:
+      add_staff_user_ids_to_admin_users: true
+      add_staff_user_ids_of_type: "google"
+    homepage:
+      templateVars:
+        org:
+          name: Los Angeles City College
+          logo_url: https://lacitycollege.edu/About/Communications-Media/documents/OfficialLogo/LACC_logo_BR_RGB-01
+          url: https://www.lacitycollege.edu/
+        designed_by:
+          name: 2i2c
+          url: https://2i2c.org
+        operated_by:
+          name: CloudBank
+          url: http://cloudbank.org/
+        funded_by:
+          name: CloudBank
+          url: http://cloudbank.org/
+  hub:
+    config:
+      Authenticator:
+        allowed_users: &lacc_users
+          - PINEDAEM@lacitycollege.edu
+          - LAMKT@lacitycollege.edu
+          - sean.smorris@berkeley.edu
+          - ericvd@berkeley.edu
+          - k_usovich@berkeley.edu
+        admin_users: *lacc_users
