@@ -16,7 +16,9 @@ jupyterhub:
       value: present
       effect: NoSchedule
     continuous:
-      enabled: true
+      # We don't need this right now, and it's causing alert
+      # failures
+      enabled: false
   ingress:
     hosts: [gpu-demo.cloudbank.2i2c.cloud]
     tls:
