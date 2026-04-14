@@ -40,11 +40,6 @@ jupyterhub:
             - student.fhda.edu
             - student.deanza.edu
             - stu.evc.edu
-          https://idp01.sjsu.edu/idp/shibboleth:
-            default: false
-            username_derivation:
-              username_claim: email
-            allow_all: true
           http://google.com/accounts/o8/id:
             username_derivation:
               username_claim: email
