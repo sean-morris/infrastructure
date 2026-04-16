@@ -41,13 +41,13 @@ basehub:
           display: false
           oauth_no_confirm: true
           command:
-            - "python"
-            - "-m"
-            - "jupyterhub_usage_quotas.services.usage_viewer"
-            - "--port=9000"
-            - "--public-hub-url=https://staging.ghg.2i2c.cloud"
-            - "--prometheus-url=http://support-prometheus-server.support.svc.cluster.local"
-            - "--hub-namespace=staging"
+          - python
+          - -m
+          - jupyterhub_usage_quotas.services.usage_viewer
+          - --port=9000
+          - --public-hub-url=https://staging.ghg.2i2c.cloud
+          - --prometheus-url=http://support-prometheus-server.support.svc.cluster.local
+          - --hub-namespace=staging
       loadRoles:
         usage-quota-service:
           scopes:
@@ -77,7 +77,7 @@ basehub:
           # Allow traffic from the proxy api pod
           - podSelector:
               matchLabels:
-                hub.jupyter.org/network-access-hub: "true"
+                hub.jupyter.org/network-access-hub: 'true'
         - ports:
           - port: 8081
           from:
