@@ -5,7 +5,7 @@ cluster-autoscaler:
   awsRegion: us-east-2
 
 prometheusIngressAuthSecret:
-  enabled: true
+  enabled: false
 
 grafana:
   grafana.ini:
