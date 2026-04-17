@@ -1,5 +1,5 @@
 prometheusIngressAuthSecret:
-  enabled: true
+  enabled: false
 
 prometheus:
   server:
@@ -11,6 +11,8 @@ prometheus:
       - secretName: prometheus-tls
         hosts:
         - prometheus.reflective.2i2c.cloud
+    extraArgs:
+      web.config.file: /etc/config/web.yml
 grafana:
   grafana.ini:
     server:

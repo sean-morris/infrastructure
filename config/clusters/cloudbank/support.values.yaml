@@ -1,5 +1,5 @@
 prometheusIngressAuthSecret:
-  enabled: true
+  enabled: false
 
 prometheus:
   server:
@@ -19,6 +19,8 @@ prometheus:
         hosts:
         - prometheus.cloudbank.2i2c.cloud
 
+    extraArgs:
+      web.config.file: /etc/config/web.yml
 grafana:
   grafana.ini:
     server:

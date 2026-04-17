@@ -1,5 +1,5 @@
 prometheusIngressAuthSecret:
-  enabled: true
+  enabled: false
 
 prometheus:
   server:
@@ -17,6 +17,8 @@ prometheus:
       limits:
         memory: 8Gi
 
+    extraArgs:
+      web.config.file: /etc/config/web.yml
 cluster-autoscaler:
   enabled: true
   autoDiscovery:
