@@ -6,6 +6,10 @@ basehub:
     annotations:
       eks.amazonaws.com/role-arn: arn:aws:iam::444055461661:role/nasa-veda-prod
   jupyterhub:
+    hub:
+      image:
+        # Temporary image with jupyterhub-fancy-profiles 0.6.0
+        tag: 0.0.1-0.dev.git.15540.hbaaa997ce
     ingress:
       hosts: [hub.openveda.cloud]
       tls:
