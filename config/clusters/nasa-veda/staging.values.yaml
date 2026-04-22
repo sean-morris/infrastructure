@@ -11,8 +11,9 @@ basehub:
         2i2c/hub-name: staging
     hub:
       image:
-        # custom image built to install jupyterhub-fancy-profiles version 0.6.0 for testing
-        tag: 0.0.1-0.dev.git.14502.hff14253da
+        # custom image built to install jupyterhub-fancy-profiles from commit 9754f2188e337cd34cc5c533080583fe92fd47ca
+        # from the PR https://github.com/2i2c-org/jupyterhub-fancy-profiles/pull/149 for testing
+        tag: 0.0.1-0.dev.git.15561.hd27897dad
       config:
         GitHubOAuthenticator:
           oauth_callback_url: https://staging.hub.openveda.cloud/hub/oauth_callback
