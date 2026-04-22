@@ -382,6 +382,7 @@ binderhub-service:
       node.kubernetes.io/instance-type: r5.xlarge
   config:
     KubernetesBuildExecutor:
+      build_image: quay.io/jupyterhub/repo2docker:2025.12.1.dev94-gd3893dba2
       node_selector:
         node.kubernetes.io/instance-type: r5.xlarge
     DockerRegistry:
