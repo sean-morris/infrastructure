@@ -21,6 +21,16 @@ jupyterhub:
     continuous:
       enabled: true
 
+    extraImages:
+      # Keep up to date with the init container used for pulling in docs, under initContainers
+      nbgitpuller:
+        name: public.ecr.aws/nasa-veda/jupyterhub-gitpuller-init
+        tag: 97eb45f9d23b128aff810e45911857d5cffd05c2
+      # Keep up to date with s3fs sidecar
+      s3fs:
+        name: mas.dit.maap-project.org/root/che-sidecar-s3fs
+        tag: 2i2c # This is a mutable tag, so may trigger re-pulls
+
   custom:
     daskhubSetup:
       enabled: true
@@ -161,6 +171,22 @@ jupyterhub:
           subPath: my-team-buckets
           mountPropagation: HostToContainer
           readOnly: false
+    initContainers:
+    - name: jupyterhub-gitpuller-init
+      # Keep this up to date with `prePuller.extraImages`
+      image: public.ecr.aws/nasa-veda/jupyterhub-gitpuller-init:97eb45f9d23b128aff810e45911857d5cffd05c2
+      env:
+      - name: TARGET_PATH
+        value: veda-docs
+      - name: SOURCE_REPO
+        value: https://github.com/NASA-IMPACT/veda-docs
+      volumeMounts:
+      - name: home
+        mountPath: /home/jovyan
+        subPath: '{escaped_username}'
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
     extraContainers:
     - name: s3fs
       image: mas.dit.maap-project.org/root/che-sidecar-s3fs:2i2c

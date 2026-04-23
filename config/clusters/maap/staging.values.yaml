@@ -45,63 +45,18 @@ jupyterhub:
               kubespawner_override:
                 image: mas.dit.maap-project.org/root/maap-workspaces/2i2c/pangeo:develop
                 image_pull_policy: Always
-                init_containers:
-                - name: jupyterhub-gitpuller-init
-                  image: public.ecr.aws/nasa-veda/jupyterhub-gitpuller-init:97eb45f9d23b128aff810e45911857d5cffd05c2
-                  env:
-                  - name: TARGET_PATH
-                    value: veda-docs
-                  - name: SOURCE_REPO
-                    value: https://github.com/NASA-IMPACT/veda-docs
-                  volumeMounts:
-                  - name: home
-                    mountPath: /home/jovyan
-                    subPath: '{escaped_username}'
-                  securityContext:
-                    runAsUser: 1000
-                    runAsGroup: 1000
             02-rocker:
               display_name: Rocker Geospatial
               description: JupyterHub environment with many R geospatial libraries pre-installed
               kubespawner_override:
                 image: mas.dit.maap-project.org/root/maap-workspaces/2i2c/r:develop
                 image_pull_policy: Always
-                init_containers:
-                - name: jupyterhub-gitpuller-init
-                  image: public.ecr.aws/nasa-veda/jupyterhub-gitpuller-init:97eb45f9d23b128aff810e45911857d5cffd05c2
-                  env:
-                  - name: TARGET_PATH
-                    value: veda-docs
-                  - name: SOURCE_REPO
-                    value: https://github.com/NASA-IMPACT/veda-docs
-                  volumeMounts:
-                  - name: home
-                    mountPath: /home/jovyan
-                    subPath: '{escaped_username}'
-                  securityContext:
-                    runAsUser: 1000
-                    runAsGroup: 1000
             03-isce3:
               display_name: isce3
               description: Pangeo based notebook with a Python environment and isce3
               kubespawner_override:
                 image: mas.dit.maap-project.org/root/maap-workspaces/2i2c/isce3:develop
                 image_pull_policy: Always
-                init_containers:
-                - name: jupyterhub-gitpuller-init
-                  image: public.ecr.aws/nasa-veda/jupyterhub-gitpuller-init:97eb45f9d23b128aff810e45911857d5cffd05c2
-                  env:
-                  - name: TARGET_PATH
-                    value: veda-docs
-                  - name: SOURCE_REPO
-                    value: https://github.com/NASA-IMPACT/veda-docs
-                  volumeMounts:
-                  - name: home
-                    mountPath: /home/jovyan
-                    subPath: '{escaped_username}'
-                  securityContext:
-                    runAsUser: 1000
-                    runAsGroup: 1000
             04-qgis:
               display_name: QGIS on Linux Desktop
               description: Linux desktop in the browser, with qgis installed
