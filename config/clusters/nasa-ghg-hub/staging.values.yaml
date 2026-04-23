@@ -27,7 +27,7 @@ basehub:
     hub:
       image:
         name: quay.io/2i2c/jupyterhub-usage-quotas
-        tag: 8fbdaf8ce82e245a
+        tag: 36d91c2728362a62522643c3e031b0c829766206
       config:
         GitHubOAuthenticator:
           oauth_callback_url: https://staging.ghg.2i2c.cloud/hub/oauth_callback
@@ -48,6 +48,7 @@ basehub:
           - --public-hub-url=https://staging.ghg.2i2c.cloud
           - --prometheus-url=http://support-prometheus-server.support.svc.cluster.local
           - --hub-namespace=staging
+          - --UsageConfig.config_file=/usr/local/etc/jupyterhub/jupyterhub_config.py
       loadRoles:
         usage-quota-service:
           scopes:
