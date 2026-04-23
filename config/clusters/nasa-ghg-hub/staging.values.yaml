@@ -27,7 +27,7 @@ basehub:
     hub:
       image:
         name: quay.io/2i2c/jupyterhub-usage-quotas
-        tag: 8fbdaf8ce82e245a
+        tag: 1389e6181c78ec61e9c3c5e430e8840758d0854c
       config:
         GitHubOAuthenticator:
           oauth_callback_url: https://staging.ghg.2i2c.cloud/hub/oauth_callback
