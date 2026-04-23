@@ -125,11 +125,11 @@ function(VARS_2I2C_AWS_ACCOUNT_ID=null)
     summary,
     severity,
                                                ) {
-    alert: 'Pod stuck in Pending for at least 15m',
+    alert: 'Pod stuck in Pending for at least 30m',
     expr: |||
       max by (namespace, pod) (kube_pod_status_phase{phase="Pending"}) > 0
     |||,
-    'for': '15m',
+    'for': '30m',
     labels: {
       cluster: cluster_name,
       severity: severity,
