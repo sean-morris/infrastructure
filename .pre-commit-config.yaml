@@ -25,7 +25,7 @@ repos:
 
   # Autoformat: Python code
 - repo: https://github.com/psf/black-pre-commit-mirror
-  rev: 26.1.0
+  rev: 26.3.1
   hooks:
   - id: black
 
@@ -52,7 +52,7 @@ repos:
 
   # Prevent known typos from being committed
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.4.1
+  rev: v2.4.2
   hooks:
   - id: codespell
     args:
@@ -63,7 +63,7 @@ repos:
 
 # Autoformat jsonnet
 - repo: https://github.com/google/go-jsonnet
-  rev: v0.21.0
+  rev: v0.22.0
   hooks:
   - id: jsonnet-format
     exclude: eksctl/template.jsonnet
