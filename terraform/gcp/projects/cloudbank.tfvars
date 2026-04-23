@@ -268,7 +268,7 @@ persistent_disks = {
     name_suffix = "uchicago"
   }
   "umd" = {
-    size        = 25
+    size        = 50
     name_suffix = "umd"
   }
   "und" = {
