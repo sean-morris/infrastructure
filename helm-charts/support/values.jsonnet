@@ -2,6 +2,29 @@ local cluster_name = std.extVar('VARS_2I2C_CLUSTER_NAME');
 local provider_name = std.extVar('VARS_2I2C_PROVIDER');
 
 function(VARS_2I2C_AWS_ACCOUNT_ID=null)
+  local sameDayAction = 'same day action needed';
+  local sameWeekAction = 'action needed this week';
+  local immediateAction = 'take immediate action';
+  local makeMissingKubeletVolumeMetricsAlert = function(
+    summary,
+    severity,
+    forInterval='5m',
+                                               ) {
+    alert: 'Kubelet volume metrics are missing',
+    expr: |||
+      # Detect when the kubelet PVC metrics are missing
+      absent(kubelet_volume_stats_available_bytes) == 1
+    |||,
+    'for': forInterval,
+    labels: {
+      cluster: cluster_name,
+      severity: severity,
+    } + labels,
+    annotations: {
+      summary: summary,
+    },
+  };
+
   local makePVCApproachingFullAlert = function(
     summary,
     persistentvolumeclaim,
@@ -243,38 +266,38 @@ function(VARS_2I2C_AWS_ACCOUNT_ID=null)
                   'Home Directory Disk very close to full: cluster:%s hub:{{ $labels.namespace }}' % [cluster_name],
                   'home-nfs',
                   10,
-                  'same day action needed',
+                  sameDayAction,
                 ),
                 makePVCApproachingFullAlert(
                   'Home Directory Disk is full: cluster:%s hub:{{ $labels.namespace }}' % [cluster_name],
                   'home-nfs',
                   0,
-                  'take immediate action',
+                  immediateAction,
                   '1m',
                 ),
                 makePVCApproachingFullAlert(
                   'Hub Database Disk about to be full: cluster:%s hub:{{ $labels.namespace }}' % [cluster_name],
                   'hub-db-dir',
                   10,
-                  'same day action needed'
+                  sameDayAction
                 ),
                 makePVCApproachingFullAlert(
                   'Hub Database Disk is full: cluster:%s hub:{{ $labels.namespace }}' % [cluster_name],
                   'hub-db-dir',
                   0,
-                  'take immediate action'
+                  immediateAction
                 ),
                 makePVCApproachingFullAlert(
                   'Prometheus Disk about to be full: cluster:%s' % [cluster_name],
                   'support-prometheus-server',
                   10,
-                  'same day action needed'
+                  sameDayAction
                 ),
                 makePVCApproachingFullAlert(
                   'Prometheus Disk is full: cluster:%s' % [cluster_name],
                   'support-prometheus-server',
                   0,
-                  'take immediate action'
+                  immediateAction
                 ),
               ],
             },
@@ -283,7 +306,7 @@ function(VARS_2I2C_AWS_ACCOUNT_ID=null)
               rules: [
                 makeTwoServersStartupFailureAlert(
                   'At least two servers have failed to start in the last 30m: cluster %s hub:{{ $labels.namespace }}' % [cluster_name],
-                  'immediate action needed',
+                  immediateAction,
                 ),
               ],
             },
@@ -294,31 +317,31 @@ function(VARS_2I2C_AWS_ACCOUNT_ID=null)
                   'jupyterhub-cost-monitoring',
                   'jupyterhub-cost-monitoring pod has restarted on %s:{{ $labels.namespace }}' % [cluster_name],
                   '.*cost-monitoring.*',
-                  'action needed this week'
+                  sameWeekAction
                 ),
                 makePodRestartAlert(
                   'jupyterhub-groups-exporter',
                   'jupyterhub-groups-exporter pod has restarted on %s:{{ $labels.namespace }}' % [cluster_name],
                   '.*groups-exporter.*',
-                  'action needed this week'
+                  sameWeekAction
                 ),
                 makePodRestartAlert(
                   'jupyterhub-home-nfs',
                   'jupyterhub-home-nfs pod has restarted on %s:{{ $labels.namespace }}' % [cluster_name],
                   '^storage-quota-home-nfs.*',
-                  'same day action needed'
+                  sameDayAction
                 ),
                 makePodRestartAlert(
                   'support-grafana',
                   'support-grafana pod has restarted on %s:{{ $labels.namespace }}' % [cluster_name],
                   '^support-grafana.*',
-                  'action needed this week'
+                  sameWeekAction
                 ),
                 makePodRestartAlert(
                   'proxy',
                   'proxy pod has restarted on %s:{{ $labels.namespace }}' % [cluster_name],
                   '^proxy.*',
-                  'immediate action needed'
+                  immediateAction
                 ),
               ],
             },
@@ -327,11 +350,11 @@ function(VARS_2I2C_AWS_ACCOUNT_ID=null)
               rules: [
                 makePodStuckInPendingForTooLongAlert(
                   'Pod is stuck in Pending state for a suspicious long time',
-                  'action needed this week'
+                  sameWeekAction
                 ),
                 makePodStuckInTerminatingForTooLongAlert(
                   'Pod is stuck in Terminating state for a suspicious long time',
-                  'action needed this week'
+                  sameWeekAction
                 ),
               ],
             },
@@ -340,7 +363,17 @@ function(VARS_2I2C_AWS_ACCOUNT_ID=null)
               rules: [
                 diskIOApproachingSaturation(
                   'Disk IO approaching saturation',
-                  'action needed this week'
+                  sameWeekAction
+                ),
+              ],
+            },
+            {
+              name: 'Infrastructure Integrity',
+              rules: [
+                makeMissingKubeletVolumeMetricsAlert(
+                  'Kubelet volume metrics are not being reported',
+                  sameDayAction,
+                  '30m'
                 ),
               ],
             },
