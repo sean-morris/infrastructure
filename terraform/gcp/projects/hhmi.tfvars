@@ -2,7 +2,7 @@ prefix                 = "hhmi"
 project_id             = "hhmi-398911"
 zone                   = "us-west2-b"
 region                 = "us-west2"
-core_node_machine_type = "n2-highmem-4"
+core_node_machine_type = "n2-highmem-2"
 billing_account_id     = "0157F7-E3EA8C-25AC3C"
 enable_network_policy  = true
 
