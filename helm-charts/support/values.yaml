@@ -165,6 +165,11 @@ prometheus:
   server:
     retention: 1098d # Keep data for at least 3 years
 
+    global:
+      # node_exporter on some nodes can take upto 15s, so let's increase
+      # the timeout for each scrape
+      scrape_timeout: 30s
+
     ingress:
       ingressClassName: nginx
       annotations:
