@@ -263,10 +263,6 @@ persistent_disks = {
     size        = 20
     name_suffix = "ucsc"
   }
-  "uchicago" = {
-    size        = 25
-    name_suffix = "uchicago"
-  }
   "umd" = {
     size        = 50
     name_suffix = "umd"
