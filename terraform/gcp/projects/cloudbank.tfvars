@@ -95,6 +95,14 @@ persistent_disks = {
     size        = 350
     name_suffix = "elcamino"
   }
+  "emich" = {
+    size        = 25
+    name_suffix = "emich"
+  }
+  "epcc" = {
+    size        = 25
+    name_suffix = "epcc"
+  }
   "evc" = {
     size        = 200
     name_suffix = "evc"
@@ -102,6 +110,10 @@ persistent_disks = {
   "etsu" = {
     size        = 100
     name_suffix = "etsu"
+  }
+  "fgcu" = {
+    size        = 25
+    name_suffix = "fgcu"
   }
   "foothill" = {
     size        = 200
@@ -182,6 +194,10 @@ persistent_disks = {
   "lbcc" = {
     size        = 25
     name_suffix = "lbcc"
+  }
+  "maine" = {
+    size        = 25
+    name_suffix = "maine"
   }
   "mendocino" = {
     size        = 40
@@ -324,7 +340,7 @@ persistent_disks = {
     name_suffix = "tiffin"
   }
   "tntech" = {
-    size        = 25
+    size        = 100
     name_suffix = "tntech"
   }
   "toledo" = {
